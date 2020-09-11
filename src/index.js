@@ -1,5 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import lareneTweetImg from './img/larene-tweet.png';
+import youtubeImg from './img/youtube.png';
+import lighthouseImg from './img/lighthouse.png';
+import axeImg from './img/axe.png';
+import randomImg from './img/random-img.png';
+import emulateVisionVideo from './img/emulateVisionDeficiencies.mp4';
+import './css/index.css';
 
 import {
   Appear,
@@ -16,13 +23,14 @@ import {
   Markdown,
   Notes,
   OrderedList,
+  Link,
+  Quote,
   Progress,
   Slide,
-  SpectacleLogo,
   Stepper,
   Text,
   UnorderedList,
-  indentNormalizer
+  indentNormalizer,
 } from 'spectacle';
 
 // SPECTACLE_CLI_THEME_START
@@ -52,254 +60,208 @@ const template = () => (
 );
 // SPECTACLE_CLI_TEMPLATE_END
 
-const formidableLogo =
-  'https://avatars2.githubusercontent.com/u/5078602?s=280&v=4';
-
-const cppCodeBlock = indentNormalizer(`
-#include <iostream>
-#include <cstdlib>
-#include <sstream>
-#include <pthread.h>
-
-struct thread_data_t
-{
-   int  thread_id;
-   std::string message;
-};
-
-void *print_thread_message(void *thread_arg)
-{
-   struct thread_data_t *thread_data;
-   thread_data = (struct thread_data_t *) thread_arg;
-
-   cout << "Thread ID: " << thread_data->thread_id;
-   cout << "Message: " << thread_data->message << endl;
-
-   pthread_exit(NULL);
-}
-
-int main()
-{
-  pthread_t threads[NUM_THREADS];
-  struct thread_data_t thread_data[NUM_THREADS];
-
-  for (int i = 0; i < NUM_THREADS; i++)
-  {
-    auto curried_add = [](int x) -> function<int(int)> { return [=](int y) { return x + y; }; };
-    auto answer = curried_add(i)(5);
-
-    std::stringstream message;
-    message << "The math result is " << answer << "!";
-    thread_data.thread_id = i;
-    thread_data.message = message.str();
-    int err = pthread_create(&threads, NULL, print_thread_message, (void *)&thread_data[i]);
-
-    if (err)
-    {
-      exit(-1)
-    }
+const cssTricksCodeBlock = indentNormalizer(`
+  img:not([alt]),
+  img[alt=""] {
+    border: 5px dashed red;
   }
-
-  return 0;
-}`);
+`)
 
 const Presentation = () => (
   <Deck theme={theme} template={template} transitionEffect="fade">
     <Slide>
-      <FlexBox height="100%">
-        <SpectacleLogo size={500} />
-      </FlexBox>
-    </Slide>
-    <Slide>
       <FlexBox height="100%" flexDirection="column">
-        <Heading margin="0px" fontSize="150px">
-          ✨<i>Spectacle</i> ✨
+        <Heading margin="0px" fontSize="80px">
+        Making WebApps Accessible for Everyone
         </Heading>
-        <Heading margin="0px" fontSize="h2">
-          A ReactJS Presentation Library
-        </Heading>
-        <Heading margin="0px 32px" color="primary" fontSize="h3">
-          Where you can write your decks in JSX, Markdown, or MDX!
+
+        <Heading margin="0px 32px" color="primary" fontSize="h2">
+          Maxence Poutord - @_maxpou
         </Heading>
       </FlexBox>
-      <Notes>
-        <p>
-          Notes are shown in presenter mode. Open up
-          localhost:3000/?presenterMode=true to see them.
-        </p>
-      </Notes>
     </Slide>
     <Slide
       backgroundColor="tertiary"
-      backgroundImage="url(https://github.com/FormidableLabs/dogs/blob/main/beau.jpg?raw=true)"
+      backgroundImage="url(https://heise.cloudimg.io/width/1220/q50.png-lossy-50.webp-lossy-50.foil1/_www-heise-de_/imgs/18/2/7/8/7/7/9/3/AoE2_Header_Microsoft-f5960ac0d6c87473.png)"
       backgroundOpacity={0.5}
     >
-      <Heading>Custom Backgrounds</Heading>
+      <Heading>The day I lost that battle...</Heading>
+    </Slide>
+    <Slide>
+      <FlexBox height="100%" flexDirection="column">
+        <Heading margin="0px" fontSize="80px">
+          Making WebApps Accessible for Everyone
+        </Heading>
+        <Heading margin="0px 32px" color="primary" fontSize="h2">
+          Maxence Poutord - @_maxpou
+        </Heading>
+      </FlexBox>
+    </Slide>
+    <Slide>
+      <Image src={lareneTweetImg} alt="Larene's Tweet https://twitter.com/LareneLg/status/1270578058714443776" style={{objectFit: 'contain'}}/>
+    </Slide>
+    <Slide>
+      <Heading>Types of Disabilities</Heading>
+      <UnorderedList>
+        <ListItem>👨‍🦯 Visual</ListItem>
+        <ListItem>👂 Auditory</ListItem>
+        <ListItem>🗣 Speach</ListItem>
+        <ListItem>👩‍🦼 Motor</ListItem>
+        <ListItem>🧠 Cognitive</ListItem>
+      </UnorderedList>
+    </Slide>
+
+    <Slide>
+      <Heading>Building an a11y Friendly webapp in 5 steps</Heading>
+    </Slide>
+
+    <Slide>
+      <Heading>Step 1. Unplug your mouse</Heading>
+    </Slide>
+    <Slide>
+      <Heading >Exercice: keyboard only feature</Heading>
+      <Text>🕵️‍♀️What to spot?</Text>
+      <UnorderedList>
+        <ListItem>Where's the focus</ListItem>
+        <ListItem>Click works with enter</ListItem>
+        <ListItem>Non-focusable items</ListItem>
+      </UnorderedList>
+    </Slide>
+    <Slide>
+      <Heading>Antipattern</Heading>
+      <CodePane
+        fontSize={18}
+        language="css"
+        autoFillHeight
+      >
+      {indentNormalizer(`
+        :focus {
+          outline: none;
+        }
+      `)}
+      </CodePane>
+      <div className='antipatternOutline'>
+        <button className='btn'>Button 1</button>
+        <button className='btn noOutline'>Button 2</button>
+        <button className='btn'>Button 3</button>
+      </div>
+    </Slide>
+
+    <Slide>
+      <Heading>Cool patterns</Heading>
+      <Image src={youtubeImg} alt="Youtube skip navigation" style={{width: '100%'}}/>
+    </Slide>
+
+    <Slide>
+      <Heading>Step 2. Get tools</Heading>
+      <Text>https://accessibilityinsights.io</Text>
+    </Slide>
+    <Slide>
+      <Heading style={{marginBottom: '0'}}>Lighthouse</Heading>
+      <Image src={lighthouseImg} alt="Lighthouse audit for Aliexpress.com" style={{width: '70%', margin: '0 auto'}}/>
+    </Slide>
+    <Slide>
+      <Heading style={{marginBottom: '0'}}>Axe</Heading>
+      <Image src={axeImg} alt="Axe audit for apple.com" style={{width: '85%', margin: '0 auto'}}/>
+    </Slide>
+    <Slide>
+      <Heading>CSS Hack</Heading>
+      <CodePane
+        fontSize={18}
+        language="css"
+        autoFillHeight
+      >
+        {cssTricksCodeBlock}
+      </CodePane>
+      <Image src={randomImg} style={{width: '25%', margin: '0 auto'}}/>
+    </Slide>
+
+    <Slide>
+      <Heading>Step 3. RTFM</Heading>
+    </Slide>
+    <Slide>
+      <Heading>w3.org</Heading>
+      <Link href="https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex" target="_blank" rel="noopener noreferrer">
+        https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex
+      </Link>
+    </Slide>
+    <Slide>
+      <Heading>Is My Component a11y friendly?</Heading>
       <UnorderedList>
         <ListItem>
-          <CodeSpan>backgroundColor</CodeSpan>
+          <Link href="https://v5.getbootstrap.com/docs/5.0/components/collapse/" target="_blank" rel="noopener noreferrer">
+          v5.getbootstrap.com
+          </Link>
         </ListItem>
         <ListItem>
-          <CodeSpan>backgroundImage</CodeSpan>
-        </ListItem>
-        <ListItem>
-          <CodeSpan>backgroundOpacity</CodeSpan>
-        </ListItem>
-        <ListItem>
-          <CodeSpan>backgroundSize</CodeSpan>
-        </ListItem>
-        <ListItem>
-          <CodeSpan>backgroundPosition</CodeSpan>
-        </ListItem>
-        <ListItem>
-          <CodeSpan>backgroundRepeat</CodeSpan>
+          <Link href="https://polaris.shopify.com/components/navigation/tabs#navigation" target="_blank" rel="noopener noreferrer">
+          polaris.shopify.com
+          </Link>
         </ListItem>
       </UnorderedList>
     </Slide>
-    <Slide transitionEffect="slide">
-      <Heading>Code Blocks</Heading>
-      <Stepper
-        defaultValue={[]}
-        values={[
-          [1, 1],
-          [23, 25],
-          [40, 42]
-        ]}
-      >
-        {(value, step) => (
-          <Box position="relative">
-            <CodePane
-              highlightStart={value[0]}
-              highlightEnd={value[1]}
-              fontSize={18}
-              language="cpp"
-              autoFillHeight
-            >
-              {cppCodeBlock}
-            </CodePane>
+    <Slide>
+      <Heading>Don't forget</Heading>
+      <Quote>No ARIA is better than Bad ARIA</Quote>
+    </Slide>
 
-            <Box
-              position="absolute"
-              bottom="0rem"
-              left="0rem"
-              right="0rem"
-              bg="black"
-            >
-              {/* This notes container won't appear for step 0 */}
-
-              {step === 1 && (
-                <Text fontSize="1.5rem" margin="0rem">
-                  This is a note!
-                </Text>
-              )}
-
-              {step === 2 && (
-                <Text fontSize="1.5rem" margin="0rem">
-                  You can use the stepper state to render whatever you like as
-                  you step through the code.
-                </Text>
-              )}
-            </Box>
-          </Box>
-        )}
-      </Stepper>
+    <Slide>
+      <Heading>Step 4. Mimic disabilities</Heading>
+    </Slide>
+    <Slide>
+      <Heading style={{marginBottom: '0'}}>DevTools</Heading>
+      <Text style={{margin: '0 auto'}}><strike>Chrome</strike> Brave &gt; rendering &gt; Emulate vision deficiencies</Text>
+      <video src={emulateVisionVideo} autoPlay="true" controls style={{width: '60%', margin: '0 auto'}} />
+    </Slide>
+    <Slide>
+      <Heading>Use a screen reader!</Heading>
+      <Text>iOS: VoiceOver</Text>
+      <Text>Windows: NVDA</Text>
+      <Text>Android: Talkback</Text>
+    </Slide>
+    <Slide>
+      <Heading>VoiceOver: cheat sheet</Heading>
       <Text>
-        Code Blocks now auto size and scroll when there is an overflow of
-        content! They also auto-wrap longer lines.
+        <code>⌘</code> + <code>F5</code>: Start/Stop
+        <br/>
+        <code>⇪</code>: VoiceOver Activation Key (VO)
+        <br/>
+        <code>VO</code> + <code>U</code>: Open Rotor
+        <br/>
+        <code>VO</code> + <code>⌘</code> + <code>← / →</code>: increase/decrease voice speed
+        <br/>
+        <code>VO</code> + <code>A</code> / <code>control</code>: start/stop reading
+        <br/>
+        <code>VO</code> + <code>← / →</code>: read next/previous item
       </Text>
     </Slide>
     <Slide>
-      <Heading>Animated Elements</Heading>
-      <OrderedList>
-        <Appear elementNum={0}>
-          <ListItem>Elements can animate in!</ListItem>
-        </Appear>
-        <Appear elementNum={2}>
-          <ListItem>
-            Just identify the order with the prop{' '}
-            <CodeSpan>elementNum</CodeSpan>!
-          </ListItem>
-        </Appear>
-        <Appear elementNum={1}>
-          <ListItem>Out of order</ListItem>
-        </Appear>
-      </OrderedList>
+      <Heading>🔎 What do you need to spot?</Heading>
+      <Text>Missing labels on forms, alt</Text>
+      <Text>Misformatted tables</Text>
     </Slide>
+
     <Slide>
-      <FlexBox>
-        <Text>These</Text>
-        <Text>Text</Text>
-        <Text color="secondary">Items</Text>
-        <Text fontWeight="bold">Flex</Text>
-      </FlexBox>
-      <Grid gridTemplateColumns="1fr 2fr" gridColumnGap={15}>
-        <Box backgroundColor="primary">
-          <Text color="secondary">Single-size Grid Item</Text>
-        </Box>
-        <Box backgroundColor="secondary">
-          <Text>Double-size Grid Item</Text>
-        </Box>
-      </Grid>
-      <Grid
-        gridTemplateColumns="1fr 1fr 1fr"
-        gridTemplateRows="1fr 1fr 1fr"
-        alignItems="center"
-        justifyContent="center"
-        gridRowGap={1}
-      >
-        {Array(9)
-          .fill('')
-          .map((_, index) => (
-            <FlexBox paddingTop={0} key={`formidable-logo-${index}`} flex={1}>
-              <Image src={formidableLogo} width={100} />
-            </FlexBox>
-          ))}
-      </Grid>
+      <Heading>👍 Worth watching</Heading>
+      <iframe 
+        src="https://www.youtube.com/embed/dEbl5jvLKGQ" 
+        frameBorder="0" 
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+        allowFullScreen
+        style={{width: '60%', height: '60%', margin: '0 auto'}}
+      ></iframe>
     </Slide>
+
     <Slide>
-      <Markdown>
-        {`
-          # Layout Tables in Markdown
-
-          | Browser         | Supported | Versions |
-          |-----------------|-----------|----------|
-          | Chrome          | Yes       | Last 2   |
-          | Firefox         | Yes       | Last 2   |
-          | Opera           | Yes       | Last 2   |
-          | Edge (EdgeHTML) | No        |          |
-          | IE 11           | No        |          |
-        `}
-      </Markdown>
+      <Heading>Step 5. Keep learning</Heading>
     </Slide>
-    <Markdown containsSlides>
-      {`
-        ### Even write multiple slides in Markdown
-        > Wonderfully formatted quotes
 
-        1. Even create
-        2. Lists in Markdown
+    <Slide>
+      <Heading>Twittersphere</Heading>
+      <Text>https://twitter.com/LareneLg and her amazing thread (https://twitter.com/LareneLg/status/1262197938685530113)</Text>
+      <Text>https://twitter.com/A11YProject</Text>
+    </Slide>
 
-
-        - Or Unordered Lists
-        - Too!!
-        Notes: These are notes
-        ---
-        ### This slide was also generated in Markdown!
-
-        \`\`\`jsx
-        const evenCooler = "is that you can do code in Markdown";
-        // You can even specify the syntax type!
-        \`\`\`
-
-        ### A slide can have multiple code blocks too.
-
-        \`\`\`c
-        char[] someString = "Popular languages like C too!";
-        \`\`\`
-
-        Notes: These are more notes
-      `}
-    </Markdown>
   </Deck>
 );
 

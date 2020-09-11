@@ -1,0 +1,28 @@
+.antipatternOutline {
+  margin-top: 3em;
+  display: flex;
+}
+
+.btn {
+  border-radius: 2px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  grid-auto-flow: column;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 12px;
+  background-color: #ad2853;
+  color: #fff;
+  border: 1px solid #ad2853;
+  margin: 0 3em;
+}
+
+.btn.noOutline:focus {
+  outline: none;
+}
+
+img:not([alt]),
+img[alt=""] {
+  border: 5px dashed red;
+}
