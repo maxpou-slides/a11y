@@ -6,6 +6,7 @@ import lighthouseImg from './img/lighthouse.png';
 import axeImg from './img/axe.png';
 import randomImg from './img/random-img.png';
 import emulateVisionVideo from './img/emulateVisionDeficiencies.mp4';
+import A11YInsights from './img/a11yInsights.mp4';
 import './css/index.css';
 
 import {
@@ -144,6 +145,8 @@ const Presentation = () => (
         <button className='btn'>Button 1</button>
         <button className='btn noOutline'>Button 2</button>
         <button className='btn'>Button 3</button>
+        <a className='btn'>Button 4</a>
+        <button className='btn'>Button 5</button>
       </div>
     </Slide>
 
@@ -154,11 +157,14 @@ const Presentation = () => (
 
     <Slide>
       <Heading>Step 2. Get tools</Heading>
-      <Text>https://accessibilityinsights.io</Text>
     </Slide>
     <Slide>
       <Heading style={{marginBottom: '0'}}>Lighthouse</Heading>
       <Image src={lighthouseImg} alt="Lighthouse audit for Aliexpress.com" style={{width: '70%', margin: '0 auto'}}/>
+    </Slide>
+    <Slide>
+      <Heading style={{marginBottom: '0'}}>Accessibility Insights</Heading>
+      <video src={A11YInsights} autoPlay={true} controls style={{width: '60%', margin: '0 auto'}} />
     </Slide>
     <Slide>
       <Heading style={{marginBottom: '0'}}>Axe</Heading>
@@ -182,7 +188,7 @@ const Presentation = () => (
     <Slide>
       <Heading>w3.org</Heading>
       <Link href="https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex" target="_blank" rel="noopener noreferrer">
-        https://www.w3.org/TR/wai-aria-practices-1.1/#aria_ex
+        w3.org/TR/wai-aria-practices-1.1/#aria_ex
       </Link>
     </Slide>
     <Slide>
@@ -203,6 +209,18 @@ const Presentation = () => (
     <Slide>
       <Heading>Don't forget</Heading>
       <Quote>No ARIA is better than Bad ARIA</Quote>
+
+      <CodePane
+        fontSize={18}
+        language="css"
+        autoFillHeight
+      >
+      {indentNormalizer(`
+        <button id="saveChanges">Save</button>
+
+        <div id="saveChanges" tabindex="0" role="button" aria-pressed="false">Save</div>
+      `)}
+      </CodePane>
     </Slide>
 
     <Slide>
@@ -211,7 +229,7 @@ const Presentation = () => (
     <Slide>
       <Heading style={{marginBottom: '0'}}>DevTools</Heading>
       <Text style={{margin: '0 auto'}}><strike>Chrome</strike> Brave &gt; rendering &gt; Emulate vision deficiencies</Text>
-      <video src={emulateVisionVideo} autoPlay="true" controls style={{width: '60%', margin: '0 auto'}} />
+      <video src={emulateVisionVideo} autoPlay={true} controls style={{width: '60%', margin: '0 auto'}} />
     </Slide>
     <Slide>
       <Heading>Use a screen reader!</Heading>
@@ -237,8 +255,12 @@ const Presentation = () => (
     </Slide>
     <Slide>
       <Heading>🔎 What do you need to spot?</Heading>
-      <Text>Missing labels on forms, alt</Text>
-      <Text>Misformatted tables</Text>
+      <UnorderedList>
+        <ListItem>Missing labels on forms, alt on images...</ListItem>
+        <ListItem>Wrong/missing state (i.e. <Link href="https://v5.getbootstrap.com/docs/5.0/components/dropdowns/" target="_blank" rel="noopener noreferrer">dropdown</Link>)</ListItem>
+        <ListItem>Wrong item (link vs. button...)</ListItem>
+        <ListItem>Misformatted tables</ListItem>
+      </UnorderedList>
     </Slide>
 
     <Slide>
@@ -254,12 +276,40 @@ const Presentation = () => (
 
     <Slide>
       <Heading>Step 5. Keep learning</Heading>
+      <UnorderedList>
+        <ListItem>
+          <Link href="https://web.dev/lighthouse-accessibility/" target="_blank" rel="noopener noreferrer">
+          web.dev/lighthouse-accessibility
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility" target="_blank" rel="noopener noreferrer">
+          MDN - developer.mozilla.org
+          </Link>
+        </ListItem>
+      </UnorderedList>
     </Slide>
 
     <Slide>
       <Heading>Twittersphere</Heading>
-      <Text>https://twitter.com/LareneLg and her amazing thread (https://twitter.com/LareneLg/status/1262197938685530113)</Text>
-      <Text>https://twitter.com/A11YProject</Text>
+      <UnorderedList>
+        <ListItem>
+          <Link href="https://web.dev/lighthouse-accessibility/" target="_blank" rel="noopener noreferrer">
+            @LareneLg
+          </Link> and her<Link href="https://twitter.com/LareneLg/status/1262197938685530113" target="_blank" rel="noopener noreferrer">
+          fantastic thread
+          </Link>
+        </ListItem>
+        <ListItem>
+          <Link href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility" target="_blank" rel="noopener noreferrer">
+            @A11YProject
+          </Link>
+        </ListItem>
+      </UnorderedList>
+    </Slide>
+
+    <Slide>
+      <Heading>Thanks!</Heading>
     </Slide>
 
   </Deck>
