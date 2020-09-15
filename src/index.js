@@ -104,16 +104,16 @@ const Presentation = () => (
     <Slide>
       <Heading>Types of Disabilities</Heading>
       <UnorderedList>
-        <ListItem>👨‍🦯 Visual</ListItem>
-        <ListItem>👂 Auditory</ListItem>
-        <ListItem>🗣 Speach</ListItem>
-        <ListItem>👩‍🦼 Motor</ListItem>
-        <ListItem>🧠 Cognitive</ListItem>
+        <Appear elementNum={0}><ListItem>👨‍🦯 Visual</ListItem></Appear>
+        <Appear elementNum={1}><ListItem>👂 Auditory</ListItem></Appear>
+        <Appear elementNum={2}><ListItem>🗣 Speach</ListItem></Appear>
+        <Appear elementNum={3}><ListItem>👩‍🦼 Motor</ListItem></Appear>
+        <Appear elementNum={4}><ListItem>🧠 Cognitive</ListItem></Appear>
       </UnorderedList>
     </Slide>
 
     <Slide>
-      <Heading>Building an a11y Friendly webapp in 5 steps</Heading>
+      <Heading margin="15% 0px">Building an a11y Friendly webapp in 5 steps</Heading>
     </Slide>
 
     <Slide>
@@ -121,7 +121,7 @@ const Presentation = () => (
     </Slide>
     <Slide>
       <Heading >Exercice: keyboard only feature</Heading>
-      <Text>🕵️‍♀️What to spot?</Text>
+      <Text>🕵️‍♀️ What to spot?</Text>
       <UnorderedList>
         <ListItem>Where's the focus</ListItem>
         <ListItem>Click works with enter</ListItem>
@@ -142,11 +142,11 @@ const Presentation = () => (
       `)}
       </CodePane>
       <div className='antipatternOutline'>
-        <button className='btn'>Button 1</button>
-        <button className='btn noOutline'>Button 2</button>
-        <button className='btn'>Button 3</button>
-        <a className='btn'>Button 4</a>
-        <button className='btn'>Button 5</button>
+        <button className='btn' onClick={() => console.log('Button 1')}>Button 1</button>
+        <button className='btn noOutline' onClick={() => console.log('Button 2')}>Button 2</button>
+        <button className='btn' onClick={() => console.log('Button 3')}>Button 3</button>
+        <a className='btn' onClick={() => console.log('Button 4')}>Button 4</a>
+        <button className='btn' onClick={() => console.log('Button 5')}>Button 5</button>
       </div>
     </Slide>
 
@@ -294,14 +294,14 @@ const Presentation = () => (
       <Heading>Twittersphere</Heading>
       <UnorderedList>
         <ListItem>
-          <Link href="https://web.dev/lighthouse-accessibility/" target="_blank" rel="noopener noreferrer">
+          <Link href="https://twitter.com/LareneLg" target="_blank" rel="noopener noreferrer">
             @LareneLg
           </Link> and her<Link href="https://twitter.com/LareneLg/status/1262197938685530113" target="_blank" rel="noopener noreferrer">
           fantastic thread
           </Link>
         </ListItem>
         <ListItem>
-          <Link href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility" target="_blank" rel="noopener noreferrer">
+          <Link href="https://twitter.com/A11YProject" target="_blank" rel="noopener noreferrer">
             @A11YProject
           </Link>
         </ListItem>
