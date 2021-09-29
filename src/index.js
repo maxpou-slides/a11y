@@ -145,7 +145,7 @@ const Presentation = () => (
         <button className='btn' onClick={() => console.log('Button 1')}>Button 1</button>
         <button className='btn noOutline' onClick={() => console.log('Button 2')}>Button 2</button>
         <button className='btn' onClick={() => console.log('Button 3')}>Button 3</button>
-        <a className='btn' onClick={() => console.log('Button 4')}>Button 4</a>
+        <a className='btn' onClick={() => console.log('Button 4')} onKeyUp={() => console.log('Button 4')}>Button 4</a>
         <button className='btn' onClick={() => console.log('Button 5')}>Button 5</button>
       </div>
     </Slide>
@@ -207,20 +207,40 @@ const Presentation = () => (
       </UnorderedList>
     </Slide>
     <Slide>
-      <Heading>Don't forget</Heading>
-      <Quote>No ARIA is better than Bad ARIA</Quote>
+      <Heading>What do you prefer?</Heading>
 
       <CodePane
         fontSize={18}
-        language="css"
+        language="html"
         autoFillHeight
       >
       {indentNormalizer(`
-        <button id="saveChanges">Save</button>
-
-        <div id="saveChanges" tabindex="0" role="button" aria-pressed="false">Save</div>
+        <button>Save</button>
+        `)}
+      </CodePane>
+      <Text>OR:</Text>
+      <CodePane
+        fontSize={18}
+        language="html"
+        autoFillHeight
+      >
+      {indentNormalizer(`
+        <div tabindex="0" role="button" onclick="btnHandler(event)" onKeyDown="btnHandler(event)">
+          Save
+        </div>
+        <script>
+        function btnHandler(event) {
+          if (event instanceof KeyboardEvent && event.key !== 'Enter' && event.key !== ' ') {
+            return;
+          }
+          // function's body
+        }
+        </script>
       `)}
       </CodePane>
+    </Slide>
+    <Slide>
+      <Heading style={{marginTop: '20%'}}><i>"No ARIA is better than Bad ARIA"</i></Heading>
     </Slide>
 
     <Slide>
@@ -229,7 +249,18 @@ const Presentation = () => (
     <Slide>
       <Heading style={{marginBottom: '0'}}>DevTools</Heading>
       <Text style={{margin: '0 auto'}}><strike>Chrome</strike> Brave &gt; rendering &gt; Emulate vision deficiencies</Text>
-      <video src={emulateVisionVideo} autoPlay={true} controls style={{width: '60%', margin: '0 auto'}} />
+      <video src={emulateVisionVideo} autoPlay={true} controls style={{width: '50%', margin: '0 auto'}} />
+      <form id="emulateVisionForm">
+        <input id="username-demo" type="text" placeholder="enter your email" onKeyUp={() => {
+          const input = document.getElementById('username-demo')
+          if (input.value === '') {
+            input.className='';
+            return;
+          }
+          const isEmail = /\S+@\S+\.\S+/.test(input.value)
+          isEmail ? input.className="valid" : input.className="invalid"
+        }}/>
+      </form>
     </Slide>
     <Slide>
       <Heading>Use a screen reader!</Heading>

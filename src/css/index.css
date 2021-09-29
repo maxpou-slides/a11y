@@ -26,3 +26,27 @@ img:not([alt]),
 img[alt=""] {
   border: 5px dashed red;
 }
+
+#emulateVisionForm {
+  margin-top: 20px;
+}
+
+#username-demo {
+  margin: auto;
+  display: block;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  width: 60%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+}
+#username-demo.invalid {
+  border: 1px solid red;
+  background-color: lightcoral;
+}
+#username-demo.valid {
+  border: 1px solid green;
+  background-color: lightgreen;
+}
